@@ -143,7 +143,12 @@ class SongpalSpeakerLevelEntity(CoordinatorEntity[SongpalCoordinator], NumberEnt
         self._attr_unique_id = f"{songpal_entry_id}_{self._target_key_snake}"
 
         # Extract range and step constraints
-        candidate = setting.get("candidate", {})
+        candidate = setting.get("candidate")
+        if isinstance(candidate, list) and len(candidate) > 0:
+            candidate = candidate[0]
+        if not isinstance(candidate, dict):
+            candidate = {}
+
         self._attr_native_min_value = float(candidate.get("min", -10.0))
         self._attr_native_max_value = float(candidate.get("max", 10.0))
         self._attr_native_step = float(candidate.get("step", 0.5))
