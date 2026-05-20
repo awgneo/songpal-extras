@@ -94,7 +94,7 @@ class SongpalCoordinator(DataUpdateCoordinator[list[dict]]):
                     if response.status != 200:
                         raise UpdateFailed(f"HTTP error {response.status}")
 
-                    data = await response.json()
+                    data = await response.json(content_type=None)
                     if "error" in data:
                         raise UpdateFailed(f"API error: {data['error']}")
 
