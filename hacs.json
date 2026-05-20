@@ -1,0 +1,6 @@
+{
+  "name": "Songpal Extras",
+  "render_readme": true,
+  "file_name": "songpal_extras",
+  "iot_class": "local_polling"
+}

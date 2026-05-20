@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Songpal Extras",
+        "description": "Do you want to set up Songpal Extras to add speaker level control entities to your Sony AV receivers?"
+      }
+    },
+    "abort": {
+      "already_configured": "Songpal Extras is already configured."
+    }
+  }
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 512 512">
+  <!-- Generator: Adobe Illustrator 30.2.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 1)  -->
+  <defs>
+    <style>
+      .st0, .st1, .st2 {
+        fill: none;
+      }
+
+      .st3 {
+        fill: #302002;
+        opacity: .35;
+      }
+
+      .st3, .st1, .st4, .st2 {
+        isolation: isolate;
+      }
+
+      .st5 {
+        fill: url(#radial-gradient);
+      }
+
+      .st1 {
+        opacity: .85;
+        stroke-width: 3px;
+      }
+
+      .st1, .st2 {
+        stroke: #fff;
+        stroke-linecap: round;
+      }
+
+      .st6 {
+        fill: #845402;
+      }
+
+      .st7 {
+        fill: #fff;
+      }
+
+      .st8 {
+        fill: url(#radial-gradient1);
+      }
+
+      .st9 {
+        fill: url(#radial-gradient2);
+      }
+
+      .st4 {
+        fill: #422a01;
+        opacity: .3;
+      }
+
+      .st2 {
+        opacity: .9;
+        stroke-dasharray: 2 7;
+        stroke-width: 4.5px;
+      }
+
+      .st10 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="112.1" cy="471.74" fx="112.1" fy="471.74" r=".75" gradientTransform="translate(-50032 211528) scale(448 -448)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff06a"/>
+      <stop offset=".4" stop-color="#e9be38"/>
+      <stop offset=".8" stop-color="#bc8816"/>
+      <stop offset="1" stop-color="#805303"/>
+    </radialGradient>
+    <clipPath id="clippath">
+      <circle class="st0" cx="256" cy="256" r="224"/>
+    </clipPath>
+    <radialGradient id="radial-gradient1" cx="112" cy="471.78" fx="112" fy="471.78" r=".75" gradientTransform="translate(-35673 151250) scale(320 -320)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fada52"/>
+      <stop offset=".45" stop-color="#d6a125"/>
+      <stop offset=".8" stop-color="#94670c"/>
+      <stop offset="1" stop-color="#5c3b00"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient2" cx="111.69" cy="471.89" fx="111.69" fy="471.89" r=".75" gradientTransform="translate(-18798 80525) scale(170 -170)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ebb93b"/>
+      <stop offset=".5" stop-color="#c48d1c"/>
+      <stop offset=".85" stop-color="#825705"/>
+      <stop offset="1" stop-color="#4f3100"/>
+    </radialGradient>
+  </defs>
+  <circle class="st3" cx="256" cy="264" r="224"/>
+  <rect class="st0" width="512" height="512"/>
+  <circle class="st5" cx="256" cy="256" r="224"/>
+  <g class="st10">
+    <g>
+      <circle class="st8" cx="215" cy="330" r="160"/>
+      <circle class="st9" cx="215" cy="330" r="85"/>
+      <path class="st0" d="M162,383c-29.25-29.28-29.25-76.72,0-106"/>
+      <path class="st1" d="M162,383c-9.34-9.29-16.06-20.88-19.5-33.6"/>
+      <path class="st0" d="M133.7,411.3c-44.89-44.91-44.89-117.69,0-162.6"/>
+      <path class="st1" d="M133.7,411.3c-29.07-29.05-40.43-71.4-29.8-111.1"/>
+      <path class="st0" d="M105.4,439.6c-60.53-60.53-60.53-158.67,0-219.2"/>
+      <path class="st1" d="M105.4,439.6c-49.59-49.61-59.68-126.35-24.6-187.1"/>
+      <circle class="st4" cx="143.5" cy="351.4" r="8"/>
+      <circle class="st7" cx="142.5" cy="349.4" r="8"/>
+      <circle class="st6" cx="142.5" cy="349.4" r="3"/>
+      <circle class="st4" cx="104.9" cy="302.2" r="8"/>
+      <circle class="st7" cx="103.9" cy="300.2" r="8"/>
+      <circle class="st6" cx="103.9" cy="300.2" r="3"/>
+      <circle class="st4" cx="81.8" cy="254.5" r="8"/>
+      <circle class="st7" cx="80.8" cy="252.5" r="8"/>
+      <circle class="st6" cx="80.8" cy="252.5" r="3"/>
+      <path class="st0" d="M386.8,125.2c72.23,72.24,72.23,189.36,0,261.6"/>
+      <path class="st2" d="M386.8,386.8c46.74-46.73,65-114.85,47.9-178.7"/>
+      <path class="st0" d="M396,116c77.31,77.32,77.31,202.68,0,280"/>
+      <path class="st2" d="M396,396c32.91-32.93,53.16-76.41,57.2-122.8"/>
+    </g>
+  </g>
+</svg>

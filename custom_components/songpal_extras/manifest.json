@@ -1,0 +1,16 @@
+{
+  "domain": "songpal_extras",
+  "name": "Songpal Extras",
+  "codeowners": [
+    "@awgneo"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "songpal"
+  ],
+  "documentation": "https://github.com/awgneo/songpal-extras",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}
