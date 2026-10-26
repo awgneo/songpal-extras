@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# songpal-extras: speaker levels for Sony receivers in Home Assistant, beside the native songpal integration
+# ==============================================================================
+# A Python project managed with uv: 'flow test' runs its pytest suite (test/) through uv.
+
+source ./flows/base
+source ./flows/cell/base
+
+# Dependencies
+FLOWS_DEPENDENCIES+=(uv)
+
+# Hooks
+# In CI, 'flow ci test' installs the project and its dev dependencies first (uv.lock, as locked)
+CI_SETUP_HOOKS+=(songpal-packages)
+
+songpal-packages() {
+  uv sync --frozen
+}
+
+# Lints the integration and its tests with ruff
+songpal-lint() {
+  uv run ruff check custom_components test || abort "ruff found problems" 2
+  success "Lint passed"
+}
+
+# ------------------------------------------------------------------------------
+# Registration
+# ------------------------------------------------------------------------------
+
+songpal-usage() {
+  echo "lint|Lint the integration and its tests (ruff)"
+}
+
+songpal-flow() {
+  case "$1" in
+    lint) songpal-lint; return $? ;;
+    *) return 127 ;;
+  esac
+}
+
+flows-register "songpal" true
+flows-dispatch "$@"

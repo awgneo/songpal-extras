@@ -1,0 +1,590 @@
+{
+  "result": [
+    [
+      {
+        "candidate": [
+          {
+            "title": "Front & Center",
+            "titleTextID": "sound-inceiling-frontcenter",
+            "value": "frontCenter"
+          },
+          {
+            "title": "Front",
+            "titleTextID": "sound-inceiling-front",
+            "value": "front"
+          },
+          {
+            "title": "Off",
+            "titleTextID": "sound-inceiling-off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "off",
+        "isAvailable": false,
+        "target": "inCeilingSpeakerMode",
+        "titleTextID": "sound-inceiling",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Bottom Center Level",
+            "titleTextID": "bottomCenterLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "bottomCenterLevel",
+        "title": "Bottom Center Level",
+        "titleTextID": "speaker-speakerlevel-bottomcenterlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Bottom Front L Level",
+            "titleTextID": "bottomFrontLLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "bottomFrontLLevel",
+        "title": "Bottom Front L Level",
+        "titleTextID": "speaker-speakerlevel-bottomfrontllevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Bottom Front R Level",
+            "titleTextID": "bottomFrontRLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "bottomFrontRLevel",
+        "title": "Bottom Front R Level",
+        "titleTextID": "speaker-speakerlevel-bottomfrontrlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Center1 Level",
+            "titleTextID": "center1Level",
+            "value": "5.0"
+          }
+        ],
+        "currentValue": "5.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "center1Level",
+        "title": "Center1 Level",
+        "titleTextID": "speaker-speakerlevel-center",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Center2 Level",
+            "titleTextID": "center2Level",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "center2Level",
+        "title": "Center2 Level",
+        "titleTextID": "speaker-speakerlevel-center2",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Center Level",
+            "titleTextID": "centerLevel",
+            "value": "5.0"
+          }
+        ],
+        "currentValue": "5.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "centerLevel",
+        "title": "Center Level",
+        "titleTextID": "speaker-speakerlevel-center",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Front L Level",
+            "titleTextID": "frontLLevel",
+            "value": "-1.5"
+          }
+        ],
+        "currentValue": "-1.5",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "frontLLevel",
+        "title": "Front L Level",
+        "titleTextID": "speaker-speakerlevel-frontl",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Front R Level",
+            "titleTextID": "frontRLevel",
+            "value": "-1.5"
+          }
+        ],
+        "currentValue": "-1.5",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "frontRLevel",
+        "title": "Front R Level",
+        "titleTextID": "speaker-speakerlevel-frontr",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Front Wide L Level",
+            "titleTextID": "frontWideLLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "frontWideLLevel",
+        "title": "Front Wide L Level",
+        "titleTextID": "speaker-speakerlevel-frontwidellevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Front Wide R Level",
+            "titleTextID": "frontWideRLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "frontWideRLevel",
+        "title": "Front Wide R Level",
+        "titleTextID": "speaker-speakerlevel-frontwiderlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height2 L Level",
+            "titleTextID": "high2LLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "high2LLevel",
+        "title": "Height2 L Level",
+        "titleTextID": "speaker-speakerlevel-heigth2llevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height2 R Level",
+            "titleTextID": "high2RLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "high2RLevel",
+        "title": "Height2 R Level",
+        "titleTextID": "speaker-speakerlevel-heigth2rlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height3 L Level",
+            "titleTextID": "high3LLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "high3LLevel",
+        "title": "Height3 L Level",
+        "titleTextID": "speaker-speakerlevel-heigth3llevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height3 R Level",
+            "titleTextID": "high3RLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "high3RLevel",
+        "title": "Height3 R Level",
+        "titleTextID": "speaker-speakerlevel-heigth3rlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height L Level",
+            "titleTextID": "highLLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "highLLevel",
+        "title": "Height L Level",
+        "titleTextID": "speaker-speakerlevel-heigth1llevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Height R Level",
+            "titleTextID": "highRLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "highRLevel",
+        "title": "Height R Level",
+        "titleTextID": "speaker-speakerlevel-heigth1rlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Subwoofer Level",
+            "titleTextID": "subwooferLevel",
+            "value": "-10.0"
+          }
+        ],
+        "currentValue": "-10.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "subwooferLevel",
+        "title": "Subwoofer Level",
+        "titleTextID": "speaker-speakerlevel-subwooferlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Surround Back L Level",
+            "titleTextID": "surroundBackLLevel",
+            "value": "3.5"
+          }
+        ],
+        "currentValue": "3.5",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "surroundBackLLevel",
+        "title": "Surround Back L Level",
+        "titleTextID": "speaker-speakerlevel-surroundbackllevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Surround Back R Level",
+            "titleTextID": "surroundBackRLevel",
+            "value": "7.5"
+          }
+        ],
+        "currentValue": "7.5",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "surroundBackRLevel",
+        "title": "Surround Back R Level",
+        "titleTextID": "speaker-speakerlevel-surroundbackrlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Surround L Level",
+            "titleTextID": "surroundLLevel",
+            "value": "1.5"
+          }
+        ],
+        "currentValue": "1.5",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "surroundLLevel",
+        "title": "Surround L Level",
+        "titleTextID": "speaker-speakerlevel-surroundllevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Surround R Level",
+            "titleTextID": "surroundRLevel",
+            "value": "10.0"
+          }
+        ],
+        "currentValue": "10.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": true,
+        "target": "surroundRLevel",
+        "title": "Surround R Level",
+        "titleTextID": "speaker-speakerlevel-surroundrlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Top Center Level",
+            "titleTextID": "topCenterLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "topCenterLevel",
+        "title": "Top Center Level",
+        "titleTextID": "speaker-speakerlevel-topcenterlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Top Front L Level",
+            "titleTextID": "topFrontLLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "topFrontLLevel",
+        "title": "Top Front L Level",
+        "titleTextID": "speaker-speakerlevel-topfrontllevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Top Front R Level",
+            "titleTextID": "topFrontRLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "topFrontRLevel",
+        "title": "Top Front R Level",
+        "titleTextID": "speaker-speakerlevel-topfrontrlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Top Rear L Level",
+            "titleTextID": "topRearLLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "topRearLLevel",
+        "title": "Top Rear L Level",
+        "titleTextID": "speaker-speakerlevel-toprearllevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "Top Rear R Level",
+            "titleTextID": "topRearRLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "topRearRLevel",
+        "title": "Top Rear R Level",
+        "titleTextID": "speaker-speakerlevel-toprearrlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "max": 10,
+            "min": -10,
+            "step": 0.5,
+            "title": "TV Center Level",
+            "titleTextID": "tvCenterLevel",
+            "value": "0.0"
+          }
+        ],
+        "currentValue": "0.0",
+        "deviceUIInfo": "picker",
+        "isAvailable": false,
+        "target": "tvCenterLevel",
+        "title": "TV Center Level",
+        "titleTextID": "speaker-speakerlevel-tvcenterlevel",
+        "type": "doubleNumberTarget"
+      },
+      {
+        "candidate": [
+          {
+            "title": "Speaker A",
+            "titleTextID": "speaker-speakers-a",
+            "value": "speakerA"
+          },
+          {
+            "title": "Off",
+            "titleTextID": "speaker-speakers-off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "speakerA",
+        "isAvailable": true,
+        "target": "speakerSelection",
+        "titleTextID": "speaker-speakers",
+        "type": "enumTarget"
+      }
+    ]
+  ],
+  "id": 1
+}

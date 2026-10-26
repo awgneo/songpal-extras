@@ -12,3 +12,16 @@ A custom Home Assistant integration that adds dynamic speaker level controls to 
 ## Installation
 
 Install via HACS by adding this repository as a custom repository under settings.
+
+## Developing
+
+A Python project managed with [uv](https://docs.astral.sh/uv/); everything runs through `./flow` (the [flows](../../cellular/flows) task runner):
+
+| Command | What it does |
+| --- | --- |
+| `flow test` | Runs the pytest suite under `test/` through uv (uv installs Python 3.14 and the dev dependencies) |
+| `flow lint` | Lints the integration and its tests with ruff |
+
+The tests run the integration beside a native songpal entry, against a fake receiver (`test/conftest.py`) that answers with an STR-AN1000's own speaker settings (`test/fixtures/speaker_settings.json`) and, like the real one, with a JSON-RPC error for a target it doesn't have.
+
+Changes go through flows' branch workflow (`flow branch`, `flow commit`, `flow promote`, `flow merge`). Every pushed branch is tested in castle's CI, and `main` only merges a green Pull Request. castle's Forgejo is the source; GitHub is its push mirror, which HACS installs from.
