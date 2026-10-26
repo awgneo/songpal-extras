@@ -1,0 +1,246 @@
+{
+  "result": [
+    [
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "On",
+            "value": "on"
+          },
+          {
+            "isAvailable": true,
+            "title": "Off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "on",
+        "isAvailable": true,
+        "target": "360SSM",
+        "title": "360 Spatial Sound Mapping",
+        "titleTextID": "sound-360ssm",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "On",
+            "value": "on"
+          },
+          {
+            "isAvailable": true,
+            "title": "Off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "on",
+        "isAvailable": true,
+        "target": "dsdNative",
+        "title": "DSD Native",
+        "titleTextID": "sound-dsdnative",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "On",
+            "value": "on"
+          },
+          {
+            "isAvailable": true,
+            "title": "Off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "off",
+        "isAvailable": true,
+        "target": "pureDirect",
+        "title": "Pure Direct",
+        "titleTextID": "sound-puredirect",
+        "type": "booleanTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "Full Flat",
+            "titleTextID": "sound-calibrationtype-full-flat",
+            "value": "fullFlat"
+          },
+          {
+            "isAvailable": true,
+            "title": "Engineer",
+            "titleTextID": "sound-calibrationtype-engineer",
+            "value": "engineer"
+          },
+          {
+            "isAvailable": true,
+            "title": "Front Reference",
+            "titleTextID": "sound-calibrationtype-front-reference",
+            "value": "frontReference"
+          },
+          {
+            "isAvailable": true,
+            "title": "Off",
+            "titleTextID": "sound-calibrationtype-off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "engineer",
+        "isAvailable": true,
+        "target": "calibrationType",
+        "titleTextID": "sound-calibrationtype",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "1: Movie",
+            "titleTextID": "custompreset-custompreset-movie",
+            "value": "movie"
+          },
+          {
+            "isAvailable": true,
+            "title": "2: Music",
+            "titleTextID": "custompreset-custompreset-music",
+            "value": "music"
+          },
+          {
+            "isAvailable": true,
+            "title": "Undo",
+            "titleTextID": "custompreset-custompreset-undo",
+            "value": "undo"
+          }
+        ],
+        "currentValue": "",
+        "isAvailable": true,
+        "target": "sceneSelection",
+        "titleTextID": "custompreset-custompreset",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "2ch Stereo",
+            "titleTextID": "sound-soundfield-2ch-stereo",
+            "value": "2chStereo"
+          },
+          {
+            "isAvailable": true,
+            "title": "Direct",
+            "titleTextID": "sound-soundfield-direct",
+            "value": "direct"
+          },
+          {
+            "isAvailable": true,
+            "title": "Auto Format Decoding",
+            "titleTextID": "sound-soundfield-afd",
+            "value": "AFD"
+          },
+          {
+            "isAvailable": true,
+            "title": "Multi Stereo",
+            "titleTextID": "sound-soundfield-multi-stereo",
+            "value": "multiStereo"
+          },
+          {
+            "isAvailable": true,
+            "title": "Auto Format Decoding for Movie",
+            "titleTextID": "sound-soundfield-sony-mode",
+            "value": "sonyMode"
+          },
+          {
+            "isAvailable": true,
+            "title": "Dolby Mode",
+            "titleTextID": "sound-soundfield-dolby-mode",
+            "value": "dolbyMode"
+          },
+          {
+            "isAvailable": true,
+            "title": "DTS:X Mode",
+            "titleTextID": "sound-soundfield-dts-mode",
+            "value": "dtsMode"
+          },
+          {
+            "isAvailable": true,
+            "title": "Audio Enhancer",
+            "titleTextID": "sound-soundfield-audio-enhancer",
+            "value": "audioEnhancer"
+          }
+        ],
+        "currentValue": "multiStereo",
+        "deviceUIInfo": "soundFieldFig",
+        "isAvailable": true,
+        "target": "soundField",
+        "title": "Sound Field",
+        "titleTextID": "sound-soundfield",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "Bright",
+            "titleTextID": "system-dimmer-bright",
+            "value": "bright"
+          },
+          {
+            "isAvailable": true,
+            "title": "Dark",
+            "titleTextID": "system-dimmer-dark",
+            "value": "dark"
+          },
+          {
+            "isAvailable": true,
+            "title": "Off",
+            "titleTextID": "system-dimmer-off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "dark",
+        "isAvailable": true,
+        "target": "dimmer",
+        "titleTextID": "system-dimmer",
+        "type": "enumTarget"
+      },
+      {
+        "candidate": [
+          {
+            "isAvailable": true,
+            "title": "HDMI A",
+            "titleTextID": "system-hdimoutput-a",
+            "value": "hdmi_A"
+          },
+          {
+            "isAvailable": true,
+            "title": "HDMI A + B",
+            "titleTextID": "system-hdimoutput-ab",
+            "value": "hdmi_AB"
+          },
+          {
+            "isAvailable": true,
+            "title": "HDMI B",
+            "titleTextID": "system-hdimoutput-b",
+            "value": "hdim_B"
+          },
+          {
+            "isAvailable": true,
+            "title": "HDMI Off",
+            "titleTextID": "system-hdimoutput-off",
+            "value": "off"
+          }
+        ],
+        "currentValue": "hdmi_A",
+        "isAvailable": true,
+        "target": "hdmiOutput",
+        "titleTextID": "system-hdimoutput",
+        "type": "enumTarget"
+      }
+    ]
+  ],
+  "id": 1
+}

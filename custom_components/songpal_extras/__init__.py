@@ -1,8 +1,11 @@
 """The Songpal Extras integration."""
 
-import logging
-from datetime import timedelta
 import asyncio
+import logging
+from dataclasses import dataclass
+from datetime import timedelta
+from typing import Any
+
 import aiohttp
 
 from homeassistant.config_entries import ConfigEntry
@@ -14,7 +17,7 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
-PLATFORMS: list[Platform] = [Platform.NUMBER]
+PLATFORMS: list[Platform] = [Platform.NUMBER, Platform.SELECT]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -59,8 +62,20 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return unload_ok
 
 
-class SongpalCoordinator(DataUpdateCoordinator[list[dict]]):
-    """Coordinator to manage fetching speaker settings from Sony API."""
+@dataclass
+class SongpalData:
+    """What the receiver reports: its speaker settings, and its sound field setting (None when it has none)."""
+
+    speakers: list[dict[str, Any]]
+    sound_field: dict[str, Any] | None
+
+
+class SongpalError(Exception):
+    """The receiver couldn't be reached, or answered with an error."""
+
+
+class SongpalCoordinator(DataUpdateCoordinator[SongpalData]):
+    """Coordinator to manage fetching speaker and sound settings from Sony API."""
 
     def __init__(
         self,
@@ -79,25 +94,28 @@ class SongpalCoordinator(DataUpdateCoordinator[list[dict]]):
             update_interval=timedelta(seconds=30),
         )
 
-    async def _async_update_data(self) -> list[dict]:
-        """Fetch speaker settings from API."""
-        url = f"{self.endpoint}/audio"
-        payload = {
-            "method": "getSpeakerSettings",
-            "id": 1,
-            "params": [{"target": ""}],
-            "version": "1.0",
-        }
+    async def call(self, method: str, params: dict[str, Any], version: str) -> list[Any]:
+        """Calls a method of the receiver's audio service and returns its result. The receiver answers an
+        error with HTTP 200 and an 'error' in the body, so both are checked."""
+        payload = {"method": method, "id": 1, "params": [params], "version": version}
         try:
             async with asyncio.timeout(5):
-                async with self.session.post(url, json=payload) as response:
+                async with self.session.post(f"{self.endpoint}/audio", json=payload) as response:
                     if response.status != 200:
-                        raise UpdateFailed(f"HTTP error {response.status}")
-
+                        raise SongpalError(f"{method}: HTTP {response.status}")
                     data = await response.json(content_type=None)
-                    if "error" in data:
-                        raise UpdateFailed(f"API error: {data['error']}")
+        except (aiohttp.ClientError, TimeoutError) as err:
+            raise SongpalError(f"{method}: {err}") from err
+        if "error" in data:
+            raise SongpalError(f"{method}: {data['error']}")
+        return data["result"]
 
-                    return data["result"][0]
-        except Exception as err:
+    async def _async_update_data(self) -> SongpalData:
+        """Fetch speaker and sound settings from API."""
+        try:
+            speakers = await self.call("getSpeakerSettings", {"target": ""}, "1.0")
+            sound = await self.call("getSoundSettings", {"target": "soundField"}, "1.1")
+        except SongpalError as err:
             raise UpdateFailed(f"Error communicating with Sony API: {err}") from err
+        sound_field = next((s for s in sound[0] if s.get("target") == "soundField"), None)
+        return SongpalData(speakers=speakers[0], sound_field=sound_field)

@@ -2,18 +2,16 @@
 
 import logging
 import re
-import asyncio
 
 from homeassistant.components.number import NumberEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers import device_registry as dr, entity_registry as er
-from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
-from .const import DOMAIN
-from . import SongpalCoordinator
+from . import SongpalCoordinator, SongpalError
+from .receiver import Receiver, receivers
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -56,63 +54,17 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the Songpal Extras number platform."""
-    coordinators = hass.data[DOMAIN]["coordinators"]
-
-    device_registry = dr.async_get(hass)
-    entity_registry = er.async_get(hass)
-
     entities = []
-    for songpal_entry_id, coordinator in coordinators.items():
-        songpal_entry = hass.config_entries.async_get_entry(songpal_entry_id)
-        if not songpal_entry:
-            continue
-
-        # Find the device associated with this songpal entry
-        matching_device = None
-        for device in device_registry.devices.values():
-            if songpal_entry_id in device.config_entries:
-                matching_device = device
-                break
-
-        if not matching_device:
-            _LOGGER.warning(
-                "Could not find matching device for songpal config entry: %s",
-                songpal_entry.title,
-            )
-            continue
-
-        # Search for a media_player entity linked to this device to copy its object ID
-        media_player_object_id = None
-        for entity in entity_registry.entities.values():
-            if (
-                entity.device_id == matching_device.id
-                and entity.domain == "media_player"
-            ):
-                media_player_object_id = entity.entity_id.split(".")[1]
-                break
-
-        if not media_player_object_id:
-            media_player_object_id = matching_device.name.lower().replace(" ", "_")
-
+    for receiver in receivers(hass):
         # Parse settings from the coordinator's initial data
-        settings = coordinator.data
+        settings = receiver.coordinator.data.speakers if receiver.coordinator.data else None
         if not settings:
             _LOGGER.warning("No settings data returned from Sony receiver during setup")
             continue
 
         for setting in settings:
-            if setting.get("type") == "doubleNumberTarget" and setting.get(
-                "isAvailable"
-            ):
-                entities.append(
-                    SongpalSpeakerLevelEntity(
-                        coordinator,
-                        setting,
-                        matching_device,
-                        media_player_object_id,
-                        songpal_entry_id,
-                    )
-                )
+            if setting.get("type") == "doubleNumberTarget" and setting.get("isAvailable"):
+                entities.append(SongpalSpeakerLevelEntity(receiver, setting))
 
     async_add_entities(entities)
 
@@ -124,23 +76,16 @@ class SongpalSpeakerLevelEntity(CoordinatorEntity[SongpalCoordinator], NumberEnt
     _attr_unit_of_measurement = "dB"
     _attr_icon = "mdi:speaker"
 
-    def __init__(
-        self,
-        coordinator: SongpalCoordinator,
-        setting: dict,
-        device: dr.DeviceEntry,
-        media_player_object_id: str,
-        songpal_entry_id: str,
-    ) -> None:
+    def __init__(self, receiver: Receiver, setting: dict) -> None:
         """Initialize."""
-        super().__init__(coordinator)
+        super().__init__(receiver.coordinator)
         self._target_key = setting["target"]
         snake_key, human_name = convert_target_to_snake_and_name(self._target_key)
         self._target_key_snake = snake_key
 
         self._attr_name = human_name
-        self.entity_id = f"number.{media_player_object_id}_{self._target_key_snake}"
-        self._attr_unique_id = f"{songpal_entry_id}_{self._target_key_snake}"
+        self.entity_id = f"number.{receiver.object_id}_{self._target_key_snake}"
+        self._attr_unique_id = f"{receiver.entry_id}_{self._target_key_snake}"
 
         # Extract range and step constraints
         candidate = setting.get("candidate")
@@ -154,14 +99,7 @@ class SongpalSpeakerLevelEntity(CoordinatorEntity[SongpalCoordinator], NumberEnt
         self._attr_native_step = float(candidate.get("step", 0.5))
 
         # Associate with the existing device
-        self._attr_device_info = DeviceInfo(
-            identifiers=device.identifiers,
-            connections=device.connections,
-            name=device.name,
-            manufacturer=device.manufacturer,
-            model=device.model,
-            sw_version=device.sw_version,
-        )
+        self._attr_device_info = receiver.device_info
 
         self._update_value_from_coordinator()
 
@@ -178,7 +116,7 @@ class SongpalSpeakerLevelEntity(CoordinatorEntity[SongpalCoordinator], NumberEnt
             return
 
         # Find the setting object matching this target
-        for setting in self.coordinator.data:
+        for setting in self.coordinator.data.speakers:
             if setting.get("target") == self._target_key:
                 self._attr_available = setting.get("isAvailable", False)
                 try:
@@ -191,37 +129,13 @@ class SongpalSpeakerLevelEntity(CoordinatorEntity[SongpalCoordinator], NumberEnt
 
     async def async_set_native_value(self, value: float) -> None:
         """Set new speaker level."""
-        url = f"{self.coordinator.endpoint}/audio"
-        payload = {
-            "method": "setSpeakerSettings",
-            "id": 1,
-            "params": [
-                {"settings": [{"target": self._target_key, "value": str(value)}]}
-            ],
-            "version": "1.0",
-        }
         try:
-            async with asyncio.timeout(5):
-                async with self.coordinator.session.post(url, json=payload) as response:
-                    if response.status != 200:
-                        _LOGGER.error(
-                            "Failed to set speaker level: HTTP %s", response.status
-                        )
-                        return
-
-                    # Force immediate update in coordinator data to reflect in UI instantly
-                    if self.coordinator.data:
-                        for idx, setting in enumerate(self.coordinator.data):
-                            if setting.get("target") == self._target_key:
-                                self.coordinator.data[idx]["currentValue"] = str(value)
-                                break
-
-                    self._update_value_from_coordinator()
-                    self.async_write_ha_state()
-
-                    # Trigger a coordinator refresh in the background to sync state
-                    self.coordinator.async_set_updated_data(self.coordinator.data)
-        except Exception as err:
-            _LOGGER.error(
-                "Error setting speaker level for %s: %s", self._target_key, err
+            await self.coordinator.call(
+                "setSpeakerSettings",
+                {"settings": [{"target": self._target_key, "value": str(value)}]},
+                "1.0",
             )
+        except SongpalError as err:
+            raise HomeAssistantError(f"Could not set {self._target_key}: {err}") from err
+        # Read back what the receiver now has
+        await self.coordinator.async_refresh()

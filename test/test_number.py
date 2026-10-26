@@ -1,8 +1,11 @@
 """The speaker levels: one slider per level the receiver has, set on the receiver."""
 
+import pytest
+
 from homeassistant.components.number import ATTR_VALUE, DOMAIN as NUMBER_DOMAIN, SERVICE_SET_VALUE
 from homeassistant.const import ATTR_ENTITY_ID
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 
 from conftest import Receiver
@@ -51,6 +54,19 @@ async def test_setting_a_level_reaches_the_receiver(
         {ATTR_ENTITY_ID: "number.living_room_receiver_subwoofer_level", ATTR_VALUE: -4.5},
         blocking=True,
     )
-    assert receiver.sets == [{"target": "subwooferLevel", "value": "-4.5"}]
+    assert receiver.sets() == [{"target": "subwooferLevel", "value": "-4.5"}]
     assert receiver.setting("subwooferLevel")["currentValue"] == "-4.5"
     assert hass.states.get("number.living_room_receiver_subwoofer_level").state == "-4.5"
+
+
+async def test_a_level_the_receiver_refuses(hass: HomeAssistant, setup_integration, receiver: Receiver) -> None:
+    """A level the receiver answers with an error fails the action and keeps the slider where it was."""
+    receiver.settings.remove(receiver.setting("subwooferLevel"))
+    with pytest.raises(HomeAssistantError):
+        await hass.services.async_call(
+            NUMBER_DOMAIN,
+            SERVICE_SET_VALUE,
+            {ATTR_ENTITY_ID: "number.living_room_receiver_subwoofer_level", ATTR_VALUE: -4.5},
+            blocking=True,
+        )
+    assert hass.states.get("number.living_room_receiver_subwoofer_level").state == "-10.0"

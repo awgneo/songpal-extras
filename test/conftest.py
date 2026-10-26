@@ -26,16 +26,31 @@ def fixture(name: str) -> Any:
 
 
 class Receiver:
-    """A Sony receiver's audio service: its speaker settings as an STR-AN1000 reported them, and the
-    requests it was sent. Like the real one, it answers an unknown target with a JSON-RPC error."""
+    """A Sony receiver's audio service: its speaker and sound settings as an STR-AN1000 reported them, and
+    the requests it was sent. Like the real one, it answers an unknown target with a JSON-RPC error."""
 
     def __init__(self) -> None:
         self.settings: list[dict[str, Any]] = copy.deepcopy(fixture("speaker_settings.json")["result"][0])
+        self.sound: list[dict[str, Any]] = copy.deepcopy(fixture("sound_settings.json")["result"][0])
         self.requests: list[dict[str, Any]] = []
 
     def setting(self, target: str) -> dict[str, Any]:
-        """The receiver's setting for a target."""
+        """The receiver's speaker setting for a target."""
         return next(setting for setting in self.settings if setting["target"] == target)
+
+    def sound_setting(self, target: str) -> dict[str, Any]:
+        """The receiver's sound setting for a target."""
+        return next(setting for setting in self.sound if setting["target"] == target)
+
+    @staticmethod
+    def change(settings: list[dict[str, Any]], request: dict[str, Any]) -> dict[str, Any]:
+        """Applies a set request's changes to settings, or answers the error the receiver would."""
+        for change in request["params"][0]["settings"]:
+            if not any(setting["target"] == change["target"] for setting in settings):
+                return {"error": [3, "Illegal Argument"], "id": request["id"]}
+        for change in request["params"][0]["settings"]:
+            next(s for s in settings if s["target"] == change["target"])["currentValue"] = change["value"]
+        return {"result": [], "id": request["id"]}
 
     async def answer(self, method: str, url: Any, data: Any) -> AiohttpClientMockResponse:
         """Answers one request to the audio service."""
@@ -44,23 +59,22 @@ class Receiver:
         if request["method"] == "getSpeakerSettings":
             body = {"result": [self.settings], "id": request["id"]}
         elif request["method"] == "setSpeakerSettings":
-            body = {"result": [], "id": request["id"]}
-            for change in request["params"][0]["settings"]:
-                if not any(setting["target"] == change["target"] for setting in self.settings):
-                    body = {"error": [3, "Illegal Argument"], "id": request["id"]}
-                    break
-                self.setting(change["target"])["currentValue"] = change["value"]
+            body = self.change(self.settings, request)
+        elif request["method"] == "getSoundSettings":
+            target = request["params"][0]["target"]
+            body = {"result": [[s for s in self.sound if target in ("", s["target"])]], "id": request["id"]}
+        elif request["method"] == "setSoundSettings":
+            body = self.change(self.sound, request)
         else:
             body = {"error": [12, "No Such Method"], "id": request["id"]}
         return AiohttpClientMockResponse(method, url, json=body)
 
-    @property
-    def sets(self) -> list[dict[str, Any]]:
-        """The settings each setSpeakerSettings request sent."""
+    def sets(self, method: str = "setSpeakerSettings") -> list[dict[str, Any]]:
+        """The settings each request to a set method sent."""
         return [
             change
             for request in self.requests
-            if request["method"] == "setSpeakerSettings"
+            if request["method"] == method
             for change in request["params"][0]["settings"]
         ]
 

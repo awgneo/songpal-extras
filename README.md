@@ -7,6 +7,7 @@ A custom Home Assistant integration that adds dynamic speaker level controls to 
 - **Dynamic Speaker Configuration:** Queries the receiver API to discover only the active speaker channels for your model (e.g., 2.0, 5.1, 7.2) and sets up sliders for them.
 - **Dynamic Capabilities:** Detects the allowed range (min, max, step size) for speaker levels directly from the device.
 - **No YAML Configuration:** Automatically finds existing `songpal` integrations and adds controls under the same device cards.
+- **Sound Mode:** a `select.<receiver>_sound_mode` with **Music** (Multi Stereo, music from every speaker) and **Surround** (Auto Format Decoding, films and TV in their own format), each offered when the receiver has it. A receiver switched to another sound field elsewhere (the Sony Music Center app, the remote) shows neither; the media player's own sound mode still lists every one.
 - **Premium Performance:** Optimistic state updates for smooth slider responses in the UI.
 
 ## Installation
